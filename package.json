@@ -1,0 +1,25 @@
+{
+  "name": "fredApi",
+  "version": "0.0.1",
+  "description": "Javascript wrapper for FRED (Federal Reserve Economic Database) API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rleahy22/fredApi.git"
+  },
+  "keywords": [
+    "fred",
+    "federal",
+    "reserve",
+    "economic"
+  ],
+  "author": "Ryan Leahy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rleahy22/fredApi/issues"
+  },
+  "homepage": "https://github.com/Rleahy22/fredApi"
+}
