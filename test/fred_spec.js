@@ -66,4 +66,126 @@ describe('Fred', function() {
             });
         });
     });
+
+    describe('Categories', function() {
+        describe('getCategory', function() {
+            it('should return a category', function(done) {
+                testFred.getCategory({category_id: 125}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.categories.length).to.equal(1);
+
+                    done();
+                });
+            });
+
+            it('should error if not given am integer for category_id', function(done) {
+                testFred.getCategory({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getCategoryChildren', function() {
+            it('should return a category\'s children', function(done) {
+                testFred.getCategoryChildren({category_id: 13}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.categories.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if not given am integer for category_id', function(done) {
+                testFred.getCategoryChildren({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getCategoryRelated', function() {
+            it('should return a category\'s related categories', function(done) {
+                testFred.getCategoryRelated({category_id: 32073}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.categories.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if not given am integer for category_id', function(done) {
+                testFred.getCategoryRelated({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getCategorySeries', function() {
+            it('should return the series in a category', function(done) {
+                testFred.getCategorySeries({category_id: 125}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.seriess.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if not given am integer for category_id', function(done) {
+                testFred.getCategorySeries({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getCategoryTags', function() {
+            it('should return the tags for a category', function(done) {
+                testFred.getCategoryTags({category_id: 125}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if not given am integer for category_id', function(done) {
+                testFred.getCategoryTags({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getCategoryRelatedTags', function() {
+            it('should return the related tags for a category', function(done) {
+                testFred.getCategoryRelatedTags({category_id: 125, tag_names: 'services;quarterly'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if not given am integer for category_id', function(done) {
+                testFred.getCategoryRelatedTags({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+    });
 });
