@@ -5,11 +5,43 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
     
         jshint: {
-            all: ['lib/*.js']
+            all: ['lib/*.js', 'test/*.js']
+        },
+
+        cafemocha: {
+            test: {
+                src: ['test/*.js'],
+                options: {
+                    ui: 'bdd',
+                    reporter: 'spec'
+                }
+            }
+        },
+
+        coverageThreshold: 100,
+
+        shell: {
+            cov: {
+                command: "istanbul cover _mocha -- -R dot",
+                options: {
+                    stdout: true
+                }
+            },
+            checkCov: {
+                command: 'istanbul check-coverage --lines <%= coverageThreshold %>',
+                options: {
+                    cwd: './coverage'
+                }
+            },
+            covReport: {
+                command: 'open coverage/lcov-report/index.html'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-cafe-mocha');
+    grunt.loadNpmTasks('grunt-shell');
 
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['jshint', 'cafemocha', 'shell:cov', 'shell:covReport']);
 };
