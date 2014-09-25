@@ -30,7 +30,15 @@ module.exports = function(grunt) {
             checkCov: {
                 command: 'istanbul check-coverage --lines <%= coverageThreshold %>',
                 options: {
-                    cwd: './coverage'
+                    cwd: './coverage',
+                    callback: function (err, stdout, stderr, cb) {
+                        var matches;
+                        if (stderr) {
+                            matches = stderr.match(/(ERROR: .*)/);
+                            console.log("\n" + matches[0]);
+                        }
+                        cb();
+                    }
                 }
             },
             covReport: {
@@ -43,5 +51,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-cafe-mocha');
     grunt.loadNpmTasks('grunt-shell');
 
-    grunt.registerTask('default', ['jshint', 'cafemocha', 'shell:cov', 'shell:covReport']);
+    grunt.registerTask('default', ['jshint', 'cafemocha', 'shell:cov', 'shell:checkCov', 'shell:covReport']);
 };
