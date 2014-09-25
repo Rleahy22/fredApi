@@ -78,7 +78,7 @@ describe('Fred', function() {
                 });
             });
 
-            it('should error if not given am integer for category_id', function(done) {
+            it('should error if not given an integer for category_id', function(done) {
                 testFred.getCategory({category_id: 'cat'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
@@ -98,7 +98,7 @@ describe('Fred', function() {
                 });
             });
 
-            it('should error if not given am integer for category_id', function(done) {
+            it('should error if not given an integer for category_id', function(done) {
                 testFred.getCategoryChildren({category_id: 'cat'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
@@ -118,7 +118,7 @@ describe('Fred', function() {
                 });
             });
 
-            it('should error if not given am integer for category_id', function(done) {
+            it('should error if not given an integer for category_id', function(done) {
                 testFred.getCategoryRelated({category_id: 'cat'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
@@ -138,7 +138,7 @@ describe('Fred', function() {
                 });
             });
 
-            it('should error if not given am integer for category_id', function(done) {
+            it('should error if not given an integer for category_id', function(done) {
                 testFred.getCategorySeries({category_id: 'cat'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
@@ -158,7 +158,7 @@ describe('Fred', function() {
                 });
             });
 
-            it('should error if not given am integer for category_id', function(done) {
+            it('should error if not given an integer for category_id', function(done) {
                 testFred.getCategoryTags({category_id: 'cat'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
@@ -178,8 +178,170 @@ describe('Fred', function() {
                 });
             });
 
-            it('should error if not given am integer for category_id', function(done) {
+            it('should error if not given an integer for category_id', function(done) {
                 testFred.getCategoryRelatedTags({category_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+    });
+
+    describe('Releases', function() {
+        describe('getReleases', function() {
+            it('should return all releases', function(done) {
+                testFred.getReleases({}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.releases.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleases({limit: -1000}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getReleasesDates', function() {
+            it('should return all release dates', function(done) {
+                testFred.getReleasesDates({}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.release_dates.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleasesDates({limit: -1000}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getRelease', function() {
+            it('should return a release', function(done) {
+                testFred.getRelease({release_id: 53}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.releases.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getRelease({release_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getReleaseDates', function() {
+            it('should return release dates for a release', function(done) {
+                testFred.getReleaseDates({release_id: 82}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.release_dates.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleaseDates({release_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getReleaseSeries', function() {
+            it('should return the release series for a release', function(done) {
+                testFred.getReleaseSeries({release_id: 51}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.seriess.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleaseSeries({release_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getReleaseSources', function() {
+            it('should return the sources for a release', function(done) {
+                testFred.getReleaseSources({release_id: 51}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.sources.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleaseSources({release_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getReleaseTags', function() {
+            it('should return the sources for a release', function(done) {
+                testFred.getReleaseTags({release_id: 86}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleaseTags({release_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getReleaseRelatedTags', function() {
+            it('should return the sources for a release', function(done) {
+                testFred.getReleaseRelatedTags({release_id: 86, tag_names: 'sa;foreign'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getReleaseRelatedTags({release_id: 'cat'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
 
