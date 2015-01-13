@@ -4,19 +4,19 @@ Javascript wrapper for the St. Louis Federal Reserve Economic Data [Fred API](ht
 
 ## Installation
 
-   npm install fred
+   npm install fred-api
 
 ## Get a FRED API key
 
 Sign up for a Fred API key: [http://api.stlouisfed.org/api_key.html](http://api.stlouisfed.org/api_key.html)
-    
+
 ## Usage
 
 ### Instantiate a client
 
     >> apiKey = process.env.FRED_KEY;
     >> fred   = new Fred(apiKey);
-    
+
 #### Examples
 
     >> fred.getSeries({series_id: 'GNPCA')
@@ -37,8 +37,8 @@ Sign up for a Fred API key: [http://api.stlouisfed.org/api_key.html](http://api.
                 seasonal_adjustment_short: 'NSA',
                 last_updated: '2014-07-30 10:36:08-05',
                 popularity: 25,
-                notes: 'BEA Account Code: A001RX1' } 
-            ] 
+                notes: 'BEA Account Code: A001RX1' }
+            ]
        }
 
 ## Copyright
