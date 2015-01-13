@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-    
+
         jshint: {
             all: ['lib/*.js', 'test/*.js']
         },
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                 options: {
                     ui: 'bdd',
                     reporter: 'spec',
-                    timeout: 4000
+                    timeout: 6000
                 }
             }
         },

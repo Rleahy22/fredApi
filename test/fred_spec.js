@@ -549,5 +549,65 @@ describe('Fred', function() {
                 });
             });
         });
+
+        describe('getSources', function() {
+            it('should return all sources of economic data', function(done) {
+                testFred.getSources({limit: 20}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.sources.length).to.be.equal(20);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSources({limit: -1000}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSource', function() {
+            it('should return a source of economic data', function(done) {
+                testFred.getSource({source_id: 1}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.sources.length).to.be.equal(1);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSource({source_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSourceReleases', function() {
+            it('should return the releases for a source', function(done) {
+                testFred.getSourceReleases({source_id: 1}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.releases.length).to.be.above(10);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSourceReleases({source_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
     });
 });
