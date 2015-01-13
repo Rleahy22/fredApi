@@ -1,5 +1,5 @@
 {
-  "name": "fredApi",
+  "name": "fred-api",
   "version": "0.0.1",
   "description": "Javascript wrapper for FRED (Federal Reserve Economic Database) API",
   "main": "lib/index.js",
