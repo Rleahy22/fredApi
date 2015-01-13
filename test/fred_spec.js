@@ -354,7 +354,7 @@ describe('Fred', function() {
             it('should return a series', function(done) {
                 testFred.getSeries({series_id: 'GNPCA'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.seriess.length).to.be.equal(1);
+                    expect(res.seriess.length).to.equal(1);
 
                     done();
                 });
@@ -374,7 +374,7 @@ describe('Fred', function() {
             it('should return categories for a series', function(done) {
                 testFred.getSeriesCategories({series_id: 'EXJPUS'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.categories.length).to.be.equal(3);
+                    expect(res.categories.length).to.equal(3);
 
                     done();
                 });
@@ -394,7 +394,7 @@ describe('Fred', function() {
             it('should return observations for a series', function(done) {
                 testFred.getSeriesObservations({series_id: 'EXJPUS'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.observations.length).to.be.equal(529);
+                    expect(res.observations.length).to.equal(529);
 
                     done();
                 });
@@ -414,7 +414,7 @@ describe('Fred', function() {
             it('should return a release for a series', function(done) {
                 testFred.getSeriesRelease({series_id: 'IRA'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.releases.length).to.be.equal(1);
+                    expect(res.releases.length).to.equal(1);
 
                     done();
                 });
@@ -434,7 +434,7 @@ describe('Fred', function() {
             it('should return series that relate to a search query', function(done) {
                 testFred.getSeriesSearch({search_text: 'monetary,service,index'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.seriess.length).to.be.equal(25);
+                    expect(res.seriess.length).to.equal(25);
 
                     done();
                 });
@@ -454,7 +454,7 @@ describe('Fred', function() {
             it('should return tags that relate to a search query', function(done) {
                 testFred.getSeriesSearchTags({series_search_text: 'monetary,service,index'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.tags.length).to.be.equal(22);
+                    expect(res.tags.length).to.equal(22);
 
                     done();
                 });
@@ -474,7 +474,7 @@ describe('Fred', function() {
             it('should return related tags that relate to a search query', function(done) {
                 testFred.getSeriesSearchRelatedTags({series_search_text: 'mortgage+rate', tag_names:'30-year;frb'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.tags.length).to.be.equal(10);
+                    expect(res.tags.length).to.equal(10);
 
                     done();
                 });
@@ -494,7 +494,7 @@ describe('Fred', function() {
             it('should return tags for a series', function(done) {
                 testFred.getSeriesTags({series_id: 'STLFSI'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.tags.length).to.be.equal(9);
+                    expect(res.tags.length).to.equal(9);
 
                     done();
                 });
@@ -554,7 +554,7 @@ describe('Fred', function() {
             it('should return all sources of economic data', function(done) {
                 testFred.getSources({limit: 20}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.sources.length).to.be.equal(20);
+                    expect(res.sources.length).to.equal(20);
 
                     done();
                 });
@@ -574,7 +574,7 @@ describe('Fred', function() {
             it('should return a source of economic data', function(done) {
                 testFred.getSource({source_id: 1}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.sources.length).to.be.equal(1);
+                    expect(res.sources.length).to.equal(1);
 
                     done();
                 });
@@ -602,6 +602,66 @@ describe('Fred', function() {
 
             it('should error if given an invalid parameter', function(done) {
                 testFred.getSourceReleases({source_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getTags', function() {
+            it('should return FRED tags', function(done) {
+                testFred.getTags({limit: 20}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.equal(20);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getTags({limit: -20}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getRelatedTags', function() {
+            it('should return related tags for a tag', function(done) {
+                testFred.getRelatedTags({tag_names: 'monetary+aggregates'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.above(1);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getRelatedTags({tag_names: 'fwfrf'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getTagsSeries', function() {
+            it('should return the series matching tag names', function(done) {
+                testFred.getTagsSeries({tag_names: 'slovenia;food;oecd'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.seriess.length).to.be.above(0);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getTagsSeries({tag_names: 'fwfrf'}, function(err, res) {
                     expect(err.status).to.equal(400);
                     expect(err.message).to.match(/Bad Request/);
 
