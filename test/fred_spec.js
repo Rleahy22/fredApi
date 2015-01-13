@@ -349,5 +349,205 @@ describe('Fred', function() {
                 });
             });
         });
+
+        describe('getSeries', function() {
+            it('should return a series', function(done) {
+                testFred.getSeries({series_id: 'GNPCA'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.seriess.length).to.be.equal(1);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeries({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesCategories', function() {
+            it('should return categories for a series', function(done) {
+                testFred.getSeriesCategories({series_id: 'EXJPUS'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.categories.length).to.be.equal(3);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesCategories({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesObservations', function() {
+            it('should return observations for a series', function(done) {
+                testFred.getSeriesObservations({series_id: 'EXJPUS'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.observations.length).to.be.equal(529);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesObservations({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesRelease', function() {
+            it('should return a release for a series', function(done) {
+                testFred.getSeriesRelease({series_id: 'IRA'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.releases.length).to.be.equal(1);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesRelease({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesSearch', function() {
+            it('should return series that relate to a search query', function(done) {
+                testFred.getSeriesSearch({search_text: 'monetary,service,index'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.seriess.length).to.be.equal(25);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesSearch({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesSearchTags', function() {
+            it('should return tags that relate to a search query', function(done) {
+                testFred.getSeriesSearchTags({series_search_text: 'monetary,service,index'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.equal(22);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesSearchTags({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesSearchRelatedTags', function() {
+            it('should return related tags that relate to a search query', function(done) {
+                testFred.getSeriesSearchRelatedTags({series_search_text: 'mortgage+rate', tag_names:'30-year;frb'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.equal(10);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesSearchRelatedTags({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesTags', function() {
+            it('should return tags for a series', function(done) {
+                testFred.getSeriesTags({series_id: 'STLFSI'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.tags.length).to.be.equal(9);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesTags({series_id: 'cat'}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesUpdates', function() {
+            it('should return series in order of recency of updates', function(done) {
+                testFred.getSeriesUpdates({}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.seriess.length).to.be.above(1);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesUpdates({limit: -1000}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
+
+        describe('getSeriesVintageDates', function() {
+            it('should return the dates when changes were made to a series', function(done) {
+                testFred.getSeriesVintageDates({series_id: 'GNPCA'}, function(err, res) {
+                    expect(err).to.equal(null);
+                    expect(res.vintage_dates.length).to.be.above(1);
+
+                    done();
+                });
+            });
+
+            it('should error if given an invalid parameter', function(done) {
+                testFred.getSeriesVintageDates({limit: -1000}, function(err, res) {
+                    expect(err.status).to.equal(400);
+                    expect(err.message).to.match(/Bad Request/);
+
+                    done();
+                });
+            });
+        });
     });
 });
