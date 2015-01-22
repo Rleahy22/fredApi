@@ -1,6 +1,6 @@
 {
   "name": "fred-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Javascript wrapper for FRED (Federal Reserve Economic Database) API",
   "main": "lib/index.js",
   "repository": {
