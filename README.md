@@ -21,9 +21,10 @@ Sign up for a Fred API key: [http://api.stlouisfed.org/api_key.html](http://api.
 
 #### Examples
 
-    >> fred.getSeries({series_id: 'GNPCA'}, function(error,result) {
+    >> fred.getSeries({series_id: 'GNPCA'}, function(error, result) {
         console.log(result)
     });
+
     => { realtime_start: '2015-01-13',
          realtime_end: '2015-01-13',
          seriess:
