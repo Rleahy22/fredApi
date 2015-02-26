@@ -14,12 +14,16 @@ Sign up for a Fred API key: [http://api.stlouisfed.org/api_key.html](http://api.
 
 ### Instantiate a client
 
+    >> var Fred = require('fred-api');
+
     >> apiKey = process.env.FRED_KEY;
     >> fred   = new Fred(apiKey);
 
 #### Examples
 
-    >> fred.getSeries({series_id: 'GNPCA')
+    >> fred.getSeries({series_id: 'GNPCA'}, function(error,result) {
+        console.log(result)
+    });
     => { realtime_start: '2015-01-13',
          realtime_end: '2015-01-13',
          seriess:
