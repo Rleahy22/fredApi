@@ -374,7 +374,7 @@ describe('Fred', function() {
             it('should return categories for a series', function(done) {
                 testFred.getSeriesCategories({series_id: 'EXJPUS'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.categories.length).to.equal(3);
+                    expect(res.categories.length).to.be.above(0);
 
                     done();
                 });
@@ -394,7 +394,7 @@ describe('Fred', function() {
             it('should return observations for a series', function(done) {
                 testFred.getSeriesObservations({series_id: 'EXJPUS'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.observations.length).to.equal(529);
+                    expect(res.observations.length).to.be.above(0);
 
                     done();
                 });

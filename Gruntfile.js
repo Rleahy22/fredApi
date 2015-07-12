@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                 options: {
                     ui: 'bdd',
                     reporter: 'spec',
-                    timeout: 6000
+                    timeout: 7000
                 }
             }
         },
