@@ -434,7 +434,7 @@ describe('Fred', function() {
             it('should return series that relate to a search query', function(done) {
                 testFred.getSeriesSearch({search_text: 'monetary,service,index'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.seriess.length).to.equal(25);
+                    expect(res.seriess.length).to.equal(32);
 
                     done();
                 });
@@ -454,7 +454,7 @@ describe('Fred', function() {
             it('should return tags that relate to a search query', function(done) {
                 testFred.getSeriesSearchTags({series_search_text: 'monetary,service,index'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.tags.length).to.equal(22);
+                    expect(res.tags.length).to.equal(46);
 
                     done();
                 });
@@ -474,7 +474,7 @@ describe('Fred', function() {
             it('should return related tags that relate to a search query', function(done) {
                 testFred.getSeriesSearchRelatedTags({series_search_text: 'mortgage+rate', tag_names:'30-year;frb'}, function(err, res) {
                     expect(err).to.equal(null);
-                    expect(res.tags.length).to.equal(10);
+                    expect(res.tags.length).to.equal(12);
 
                     done();
                 });
