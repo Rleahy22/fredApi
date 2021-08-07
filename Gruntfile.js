@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-
+ 
         coverageThreshold: 100,
 
         shell: {
